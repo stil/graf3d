@@ -8,7 +8,10 @@ namespace graf3d.Engine.Oświetlenie
     /// </summary>
     public class Material
     {
-        private readonly NormalMap _normalMap = new NormalMap(@"rock.png");
+        /// <summary>
+        ///     Mapa nierówności materiału.
+        /// </summary>
+        public NormalMap NormalMap { get; set; }
 
         /// <summary>
         ///     Współczynnik wypukłości. Reguluje
@@ -51,9 +54,14 @@ namespace graf3d.Engine.Oświetlenie
         /// </summary>
         public Vector3 MapNormal(int x, int y, Vector3 normal)
         {
+            if (NormalMap == null)
+            {
+                return normal;
+            }
+
             var r = BumpFactor;
             var q1 = normal;
-            var q2 = _normalMap[x, y];
+            var q2 = NormalMap[x, y];
             return q1*(1 - r) + q2*r;
         }
     }
