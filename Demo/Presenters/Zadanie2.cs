@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using graf3d.Demo.Utils;
 using graf3d.Demo.Views;
 using graf3d.Engine.Komponenty;
 using graf3d.Engine.Oświetlenie;

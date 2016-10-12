@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\BufferedBitmap.cs" />
     <Compile Include="Utils\FpsCounter.cs" />
     <Compile Include="Utils\SceneImporter.cs" />
     <Compile Include="Views\IZadanie1.cs" />

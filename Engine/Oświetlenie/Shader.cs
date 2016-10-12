@@ -56,11 +56,11 @@ namespace graf3d.Engine.Oświetlenie
 
     public class PixelShader
     {
-        protected readonly BufferedBitmap Bitmap;
+        protected readonly IBufferedBitmap Bitmap;
         protected readonly double HalfHeight;
         protected readonly double HalfWidth;
 
-        public PixelShader(BufferedBitmap bitmap)
+        public PixelShader(IBufferedBitmap bitmap)
         {
             Bitmap = bitmap;
             HalfWidth = bitmap.PixelWidth*0.5;

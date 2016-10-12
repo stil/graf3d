@@ -19,12 +19,12 @@ namespace graf3d.Engine.Komponenty
         /// <summary>
         ///     Bitmapa, która będzie wyświetlona na ekranie.
         /// </summary>
-        protected BufferedBitmap Bitmap;
+        protected IBufferedBitmap Bitmap;
 
         /// <summary>
         ///     Inicjalizuje bitmapę i implementacje algorytmów.
         /// </summary>
-        public Device(BufferedBitmap bmp, ILineDrawingAlgorithm lineDrawing, IClippingAlgorithm clip)
+        public Device(IBufferedBitmap bmp, ILineDrawingAlgorithm lineDrawing, IClippingAlgorithm clip)
         {
             Bitmap = bmp;
             LineDrawingAlgorithm = lineDrawing;

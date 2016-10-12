@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using graf3d.Engine.Struktury;
 
-namespace graf3d.Engine.Struktury
+namespace graf3d.Demo.Utils
 {
     /// <summary>
     ///     Klasa implementująca buforowany dostęp do bitmapy.
     /// </summary>
-    public class BufferedBitmap
+    public class BufferedBitmap : IBufferedBitmap
     {
         /// <summary>
         ///     Bufor, w którym zapisywane są piksele, które będą wyświetlone w następnej klatce animacji.
@@ -15,24 +16,24 @@ namespace graf3d.Engine.Struktury
         private readonly byte[] _backBuffer;
 
         /// <summary>
-        ///     Stosunek szerokości do wysokości bitmapy.
-        /// </summary>
-        public readonly float AspectRatio;
-
-        /// <summary>
         ///     Właściwa bitmapa, która jest wyświetlana użytkownikowi.
         /// </summary>
-        public readonly WriteableBitmap BitmapSource;
+        public WriteableBitmap BitmapSource { get; }
 
         /// <summary>
-        ///     Wysokość bitmapy w piskelach.
+        ///     Stosunek szerokości do wysokości bitmapy.
         /// </summary>
-        public readonly int PixelHeight;
+        public float AspectRatio { get; }
 
         /// <summary>
         ///     Szerokość bitmapy w piskelach.
         /// </summary>
-        public readonly int PixelWidth;
+        public int PixelWidth { get; }
+
+        /// <summary>
+        ///     Wysokość bitmapy w piskelach.
+        /// </summary>
+        public int PixelHeight { get; }
 
         /// <summary>
         ///     Tworzy buforowaną bitmapę o danej szerokości i wyskości w pikselach.
