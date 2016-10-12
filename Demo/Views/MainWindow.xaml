@@ -1,0 +1,170 @@
+﻿<Window x:Class="graf3d.Demo.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="3D - Przemysław Ryciuk &lt;p@ryciuk.com&gt;" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" TextOptions.TextFormattingMode="Display">
+    <TabControl Margin="5">
+        <TabItem Header="Kamera">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Column="0" Header="Render" Margin="0,0,10,0" Padding="5">
+                    <Canvas>
+                        <Image x:Name="render" />
+                    </Canvas>
+                </GroupBox>
+                <StackPanel Grid.Column="1">
+                    <GroupBox Header="Parametry" Padding="5">
+                        <StackPanel>
+                            <TextBlock>
+                                Kąt widzenia: <TextBlock x:Name="pZoom" />
+                                &#186;
+                            </TextBlock>
+                            <TextBlock>
+                                FPS: <TextBlock x:Name="pFPS" />
+                            </TextBlock>
+                            <TextBlock>
+                                FPS min: <TextBlock x:Name="pFPSlow" />
+                            </TextBlock>
+                            <TextBlock>
+                                FPS max: <TextBlock x:Name="pFPShigh" />
+                            </TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Pozycja kamery" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0">
+                                X <TextBlock x:Name="pCamPosX" />
+                            </TextBlock>
+                            <TextBlock Grid.Column="1">
+                                Y <TextBlock x:Name="pCamPosY" />
+                            </TextBlock>
+                            <TextBlock Grid.Column="2">
+                                Z <TextBlock x:Name="pCamPosZ" />
+                            </TextBlock>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Rotacja kamery" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0">
+                                X <TextBlock x:Name="pCamRotX" />&#186;
+                            </TextBlock>
+                            <TextBlock Grid.Column="1">
+                                Y <TextBlock x:Name="pCamRotY" />&#186;
+                            </TextBlock>
+                            <TextBlock Grid.Column="2">
+                                Z <TextBlock x:Name="pCamRotZ" />&#186;
+                            </TextBlock>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Jak sterować kamerą?" Padding="5">
+                        <StackPanel>
+                            <TextBlock>
+                                <Bold>Przemieszczanie:</Bold><LineBreak />
+                                W, S - do przodu, do tyłu<LineBreak />
+                                A, D - w lewo, w prawo<LineBreak />
+                                E, C - do góry, w dół<LineBreak />
+                                <Bold>Rotacja:</Bold><LineBreak />
+                                O, L - wokół osi X<LineBreak />
+                                K, ; - wokół osi Y<LineBreak />
+                                I, P - wokół osi Z<LineBreak />
+                                <Bold>Zoom:</Bold><LineBreak />
+                                Rolka myszki
+                            </TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Odbicie">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Column="0" Header="Render" Margin="0,0,10,0" Padding="5">
+                    <Canvas>
+                        <Image x:Name="render2" VerticalAlignment="Top" />
+                    </Canvas>
+                </GroupBox>
+                <StackPanel Grid.Column="1">
+                    <GroupBox Header="Wykładnik potęgi (Blinn-Phong)" Padding="5">
+                        <StackPanel>
+                            <TextBox x:Name="specularPower" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Chropowatość (0-100)" Padding="5">
+                        <StackPanel>
+                            <TextBox x:Name="bumpFactor" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Obiekt" Padding="5">
+                        <StackPanel>
+                            <RadioButton Checked="RadioSphere_OnChecked" IsChecked="True" GroupName="objectType"
+                                         x:Name="radioSphere">
+                                Kula
+                            </RadioButton>
+                            <RadioButton Checked="RadioRectangle_OnChecked" Margin="0,5,0,0" GroupName="objectType"
+                                         x:Name="radioRectangle">
+                                Prostokąt
+                            </RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Akcje" Padding="5">
+                        <StackPanel>
+                            <Button Margin="0,5,0,0" x:Name="refreshButton">Odśwież</Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Położenie światła" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0">
+                                X <TextBlock x:Name="pLightPosX" />
+                            </TextBlock>
+                            <TextBlock Grid.Column="1">
+                                Y <TextBlock x:Name="pLightPosY" />
+                            </TextBlock>
+                            <TextBlock Grid.Column="2">
+                                Z <TextBlock x:Name="pLightPosZ" />
+                            </TextBlock>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Jak sterować światłem?" Padding="5">
+                        <StackPanel>
+                            <TextBlock>
+                                <Bold>Przemieszczanie:</Bold><LineBreak />
+                                W, S - do góry, w dół<LineBreak />
+                                A, D - w lewo, w prawo<LineBreak />
+                                E, C - do przodu, do tyłu
+                            </TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
