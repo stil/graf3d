@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="3D - Przemysław Ryciuk &lt;p@ryciuk.com&gt;" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" TextOptions.TextFormattingMode="Display">
     <TabControl Margin="5">
-        <TabItem Header="Kamera">
+        <TabItem Header="Kamera" x:Name="cameraTab">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="800" />
@@ -93,7 +93,7 @@
                 </StackPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Odbicie">
+        <TabItem Header="Odbicie" x:Name="specularTab">
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="400" />

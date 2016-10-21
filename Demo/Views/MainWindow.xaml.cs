@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using graf3d.Demo.Presenters;
 using graf3d.Engine.Oświetlenie;
 using graf3d.Engine.Struktury;
@@ -33,6 +34,36 @@ namespace graf3d.Demo.Views
             SetCoordinates(position, pCamPosX, pCamPosY, pCamPosZ);
             SetCoordinates(rotation, pCamRotX, pCamRotY, pCamRotZ);
             pZoom.Text = Math.Round(fov).ToString("0.0", CultureInfo.InvariantCulture);
+        }
+
+        event KeyEventHandler IZadanie1.KeyDown
+        {
+            add
+            {
+                KeyDown += (sender, args) =>
+                {
+                    if (cameraTab.IsSelected)
+                    {
+                        value.Invoke(sender, args);
+                    }
+                };
+            }
+            remove { }
+        }
+
+        event KeyEventHandler IZadanie2.KeyDown
+        {
+            add
+            {
+                KeyDown += (sender, args) =>
+                {
+                    if (specularTab.IsSelected)
+                    {
+                        value.Invoke(sender, args);
+                    }
+                };
+            }
+            remove { }
         }
 
         public event Action<IlluminationObject> IlluminationObjectChanged;
