@@ -1,4 +1,5 @@
 ﻿using System;
+using graf3d.Engine.Abstractions;
 using graf3d.Engine.Komponenty;
 using graf3d.Engine.Struktury;
 

@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using graf3d.Engine.Abstractions;
 using graf3d.Engine.Struktury;
 
 namespace graf3d.Demo.Utils
@@ -69,12 +71,20 @@ namespace graf3d.Demo.Utils
         /// </summary>
         public void Clear(Color32 color)
         {
+            var pattern = new []
+            {
+                color.B,
+                color.G,
+                color.R,
+                color.A
+            };
+
             for (var offset = 0; offset < _backBuffer.Length; offset += 4)
             {
-                _backBuffer[offset] = color.B;
-                _backBuffer[offset + 1] = color.G;
-                _backBuffer[offset + 2] = color.R;
-                _backBuffer[offset + 3] = color.A;
+                _backBuffer[offset] = pattern[0];
+                _backBuffer[offset + 1] = pattern[1];
+                _backBuffer[offset + 2] = pattern[2];
+                _backBuffer[offset + 3] = pattern[3];
             }
         }
 

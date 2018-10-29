@@ -1,15 +1,50 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using graf3d.Demo.Utils;
 using graf3d.Demo.Views;
+using graf3d.Engine.Abstractions;
 using graf3d.Engine.Komponenty;
 using graf3d.Engine.Oświetlenie;
 using graf3d.Engine.Struktury;
+using Color = System.Drawing.Color;
 
 namespace graf3d.Demo.Presenters
 {
+    internal class WrappedColor : IColor
+    {
+        private readonly Color _color;
+
+        public WrappedColor(Color color)
+        {
+            _color = color;
+        }
+
+        public byte R => _color.R;
+        public byte G => _color.G;
+        public byte B => _color.B;
+    }
+
+    internal class WrappedBitmap : IReadOnlyBitmap
+    {
+        private readonly Bitmap _bmp;
+
+        public WrappedBitmap(Bitmap bmp)
+        {
+            _bmp = bmp;
+        }
+
+        public int Width => _bmp.Width;
+        public int Height => _bmp.Height;
+
+        public IColor GetPixel(int x, int y)
+        {
+            return new WrappedColor(_bmp.GetPixel(x, y));
+        }
+    }
+
     internal class Zadanie2
     {
         private readonly Dictionary<IlluminationObject, Scene> _scenes = SetupScenes();
@@ -119,7 +154,7 @@ namespace graf3d.Demo.Presenters
             scene1.SurfaceShader = new Sphere();
             scene1.Lights.Add(new Light
             {
-                Color = new Color(1f, 1f, 1f, 1f),
+                Color = new Engine.Struktury.Color(1f, 1f, 1f, 1f),
                 Position = new Vector3(-1.25f, 5.25f, 13)
             });
             scene1.Camera = new Camera
@@ -128,14 +163,15 @@ namespace graf3d.Demo.Presenters
                 LookDirection = Vector3.UnitZ
             };
 
-            var map = new NormalMap(Path.Combine("Resources", "rock.png"));
+            var bitmap = new WrappedBitmap(new Bitmap(Path.Combine("Resources", "rock.png")));
+            var map = new NormalMap(bitmap);
 
             scene1.Material = new Material
             {
-                Ambient = new Color(0.1f, 0, 0, 1),
-                Diffuse = 1f*new Color(0.68f, 0.85f, 0.9f, 1f),
-                Emissive = new Color(0, 0, 0, 0),
-                Specular = 3f*new Color(0.15f, 0.15f, 0.15f, 1),
+                Ambient = new Engine.Struktury.Color(0.1f, 0, 0, 1),
+                Diffuse = 1f * new Engine.Struktury.Color(0.68f, 0.85f, 0.9f, 1f),
+                Emissive = new Engine.Struktury.Color(0, 0, 0, 0),
+                Specular = 3f * new Engine.Struktury.Color(0.15f, 0.15f, 0.15f, 1),
                 Shininess = 200.0f,
                 BumpFactor = 0.1f,
                 NormalMap = map
@@ -147,7 +183,7 @@ namespace graf3d.Demo.Presenters
             scene2.SurfaceShader = new Plane();
             scene2.Lights.Add(new Light
             {
-                Color = new Color(1, 1, 1, 1),
+                Color = new Engine.Struktury.Color(1, 1, 1, 1),
                 Position = new Vector3(-1, 0, 0),
                 AttenuationOn = true,
                 Radius = 3,
@@ -160,10 +196,10 @@ namespace graf3d.Demo.Presenters
             };
             scene2.Material = new Material
             {
-                Ambient = new Color(0.2f, 0, 0, 1),
-                Diffuse = 1f*new Color(0.68f, 0.85f, 0.9f, 1f),
-                Emissive = new Color(0, 0, 0, 1),
-                Specular = 3f*new Color(0.15f, 0.15f, 0.15f, 1),
+                Ambient = new Engine.Struktury.Color(0.2f, 0, 0, 1),
+                Diffuse = 1f * new Engine.Struktury.Color(0.68f, 0.85f, 0.9f, 1f),
+                Emissive = new Engine.Struktury.Color(0, 0, 0, 1),
+                Specular = 3f * new Engine.Struktury.Color(0.15f, 0.15f, 0.15f, 1),
                 Shininess = 200.0f,
                 BumpFactor = 0.4f,
                 NormalMap = map

@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using graf3d.Engine.Abstractions;
 using graf3d.Engine.Struktury;
 
 namespace graf3d.Engine.Oświetlenie
@@ -18,16 +18,9 @@ namespace graf3d.Engine.Oświetlenie
         private readonly Vector3[,] _map;
 
         /// <summary>
-        ///     Tworzy mapę normalnych z pliku graficznego znajdującego się pod ścieżką daną w argumencie.
-        /// </summary>
-        public NormalMap(string filename) : this(new Bitmap(filename))
-        {
-        }
-
-        /// <summary>
         ///     Tworzy mapę normalnych z bitmapy danej w argumencie.
         /// </summary>
-        public NormalMap(Bitmap bmp)
+        public NormalMap(IReadOnlyBitmap bmp)
         {
             _width = bmp.Width;
             _height = bmp.Height;

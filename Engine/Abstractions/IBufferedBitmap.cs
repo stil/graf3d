@@ -1,4 +1,6 @@
-﻿namespace graf3d.Engine.Struktury
+﻿using graf3d.Engine.Struktury;
+
+namespace graf3d.Engine.Abstractions
 {
     public interface IBufferedBitmap
     {
